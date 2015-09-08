@@ -1,0 +1,104 @@
+01:34:20 INFO: ********Overwriting the data inside directory 2015-08-17********
+01:34:20 INFO: *********************** Run information ************************
+01:34:20 INFO: Run date: 2015-08-13 17:34:20
+01:34:20 INFO: Download start: 2015-08-09 00:00:00
+01:34:20 INFO: Download stop: 2015-08-17 00:00:00
+01:34:20 INFO: Bounding box: -71.30, 42.03,-70.57, 42.63
+01:34:20 INFO: *********************** Software version ***********************
+01:34:20 INFO: Iris version: 1.8.1
+01:34:20 INFO: owslib version: 0.9.0
+01:34:20 INFO: pyoos version: 0.6.2
+01:34:23 INFO: ********************* Catalog information **********************
+01:34:23 INFO: URL: http://www.ngdc.noaa.gov/geoportal/csw
+01:34:23 INFO: CSW version: 2.0.2
+01:34:23 INFO: Number of datasets available: 10
+01:34:23 INFO: ***************************** CSW ******************************
+01:34:23 INFO: NECOFS Massachusetts (FVCOM) - Massachusetts Coastal - Latest Forecast
+01:34:23 INFO: NYHOPS Forecast Model Results
+01:34:23 INFO: ROMS ESPRESSO Real-Time Operational IS4DVAR Forecast System Version 2 (NEW) 2013-present FMRC History (Best)
+01:34:23 INFO: NECOFS GOM3 (FVCOM) - Northeast US - Latest Forecast
+01:34:23 INFO: COAWST Forecast System : USGS : US East Coast and Gulf of Mexico (Experimental)
+01:34:23 INFO: HYbrid Coordinate Ocean Model (HYCOM): Global
+01:34:23 INFO: NDBC Standard Meteorological Buoy Data
+01:34:23 INFO: National Data Buoy Center SOS
+01:34:23 INFO: G1SST, 1km blended SST
+01:34:23 INFO: NOAA Coral Reef Watch Operational Twice-Weekly Near-Real-Time Global 50km Satellite Coral Bleaching Monitoring Products
+01:34:23 INFO: ***************************** SOS ******************************
+01:34:23 INFO: http://sdf.ndbc.noaa.gov/sos/server.php?service=SOS&request=GetCapabilities&acceptVersions=1.0.0
+01:34:23 INFO: ***************************** DAP ******************************
+01:34:23 INFO: http://colossus.dl.stevens-tech.edu/thredds/dodsC/latest/Complete_gcmplt.nc.html
+01:34:23 INFO: http://geoport.whoi.edu/thredds/dodsC/coawst_4/use/fmrc/coawst_4_use_best.ncd.html
+01:34:23 INFO: http://oos.soest.hawaii.edu/thredds/dodsC/hioos/satellite/dhw.html
+01:34:23 INFO: http://oos.soest.hawaii.edu/thredds/dodsC/pacioos/hycom/global.html
+01:34:23 INFO: http://tds.marine.rutgers.edu/thredds/dodsC/roms/espresso/2013_da/his_Best/ESPRESSO_Real-Time_v2_History_Best_Available_best.ncd.html
+01:34:23 INFO: http://thredds.axiomdatascience.com/thredds/dodsC/G1_SST_GLOBAL.nc.html
+01:34:23 INFO: http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_FVCOM_OCEAN_MASSBAY_FORECAST.nc.html
+01:34:23 INFO: http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_GOM3_FORECAST.nc.html
+01:35:20 INFO: ************************* Filtered DAP *************************
+01:35:20 INFO: http://colossus.dl.stevens-tech.edu/thredds/dodsC/latest/Complete_gcmplt.nc.html
+01:35:20 INFO: http://geoport.whoi.edu/thredds/dodsC/coawst_4/use/fmrc/coawst_4_use_best.ncd.html
+01:35:20 INFO: http://oos.soest.hawaii.edu/thredds/dodsC/hioos/satellite/dhw.html
+01:35:20 INFO: http://oos.soest.hawaii.edu/thredds/dodsC/pacioos/hycom/global.html
+01:35:20 INFO: http://tds.marine.rutgers.edu/thredds/dodsC/roms/espresso/2013_da/his_Best/ESPRESSO_Real-Time_v2_History_Best_Available_best.ncd.html
+01:35:20 INFO: http://thredds.axiomdatascience.com/thredds/dodsC/G1_SST_GLOBAL.nc.html
+01:35:20 INFO: http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_FVCOM_OCEAN_MASSBAY_FORECAST.nc.html
+01:35:20 INFO: http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_GOM3_FORECAST.nc.html
+01:35:25 INFO: ******************* NDBC Collector offerings *******************
+01:35:25 INFO: National Data Buoy Center SOS: 948 offerings
+01:35:28 WARNING: c:\programs\anaconda-64\envs\swim\lib\site-packages\bs4\__init__.py:166: UserWarning: No parser was explicitly specified, so I'm using the best available HTML parser for this system ("lxml"). This usually isn't a problem, but if you run this code on another system, or in a different virtual environment, it may use a different parser and behave differently.
+
+To get rid of this warning, change this:
+
+ BeautifulSoup([your markup])
+
+to this:
+
+ BeautifulSoup([your markup], "lxml")
+
+  markup_type=markup_type))
+
+01:35:31 INFO: ********************* Collector offerings **********************
+01:35:31 INFO: NOAA.NOS.CO-OPS SOS: 1048 offerings
+01:35:33 INFO: ************************* Observations *************************
+01:35:33 INFO: **** Downloading to file 2015-08-17\2015-08-17-OBS_DATA.nc *****
+01:35:33 WARNING: c:\programs\anaconda-64\envs\swim\lib\site-packages\pandas\util\decorators.py:81: FutureWarning: the 'cols' keyword is deprecated, use 'subset' instead
+  warnings.warn(msg, FutureWarning)
+
+01:35:37 WARNING: c:\programs\anaconda-64\envs\swim\lib\site-packages\iris\fileformats\netcdf.py:1783: UserWarning: NetCDF default saving behaviour currently assigns the outermost dimensions to unlimited. This behaviour is to be deprecated, in favour of no automatic assignment. To switch to the new behaviour, set iris.FUTURE.netcdf_no_unlimited to True.
+  warnings.warn(msg)
+
+01:35:37 INFO: **************************** Models ****************************
+01:35:37 INFO: 
+[Reading url 1/8]: http://colossus.dl.stevens-tech.edu/thredds/dodsC/latest/Complete_gcmplt.nc
+01:35:37 WARNING: Cannot get cube for: http://colossus.dl.stevens-tech.edu/thredds/dodsC/latest/Complete_gcmplt.nc
+'module' object has no attribute 'SIGALRM'
+01:35:37 INFO: 
+[Reading url 2/8]: http://geoport.whoi.edu/thredds/dodsC/coawst_4/use/fmrc/coawst_4_use_best.ncd
+01:35:37 WARNING: Cannot get cube for: http://geoport.whoi.edu/thredds/dodsC/coawst_4/use/fmrc/coawst_4_use_best.ncd
+'module' object has no attribute 'SIGALRM'
+01:35:37 INFO: 
+[Reading url 3/8]: http://oos.soest.hawaii.edu/thredds/dodsC/hioos/satellite/dhw
+01:35:37 WARNING: Cannot get cube for: http://oos.soest.hawaii.edu/thredds/dodsC/hioos/satellite/dhw
+'module' object has no attribute 'SIGALRM'
+01:35:37 INFO: 
+[Reading url 4/8]: http://oos.soest.hawaii.edu/thredds/dodsC/pacioos/hycom/global
+01:35:37 WARNING: Cannot get cube for: http://oos.soest.hawaii.edu/thredds/dodsC/pacioos/hycom/global
+'module' object has no attribute 'SIGALRM'
+01:35:37 INFO: 
+[Reading url 5/8]: http://tds.marine.rutgers.edu/thredds/dodsC/roms/espresso/2013_da/his_Best/ESPRESSO_Real-Time_v2_History_Best_Available_best.ncd
+01:35:37 WARNING: Cannot get cube for: http://tds.marine.rutgers.edu/thredds/dodsC/roms/espresso/2013_da/his_Best/ESPRESSO_Real-Time_v2_History_Best_Available_best.ncd
+'module' object has no attribute 'SIGALRM'
+01:35:37 INFO: 
+[Reading url 6/8]: http://thredds.axiomdatascience.com/thredds/dodsC/G1_SST_GLOBAL.nc
+01:35:37 WARNING: Cannot get cube for: http://thredds.axiomdatascience.com/thredds/dodsC/G1_SST_GLOBAL.nc
+'module' object has no attribute 'SIGALRM'
+01:35:37 INFO: 
+[Reading url 7/8]: http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_FVCOM_OCEAN_MASSBAY_FORECAST.nc
+01:35:37 WARNING: Cannot get cube for: http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_FVCOM_OCEAN_MASSBAY_FORECAST.nc
+'module' object has no attribute 'SIGALRM'
+01:35:37 INFO: 
+[Reading url 8/8]: http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_GOM3_FORECAST.nc
+01:35:37 WARNING: Cannot get cube for: http://www.smast.umassd.edu:8080/thredds/dodsC/FVCOM/NECOFS/Forecasts/NECOFS_GOM3_FORECAST.nc
+'module' object has no attribute 'SIGALRM'
+01:35:38 INFO: 1.33 minutes
+01:35:38 INFO: EOF

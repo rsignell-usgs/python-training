@@ -1,0 +1,54 @@
+
+import xray
+import datetime
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+%matplotlib inline
+
+URL = 'http://cida.usgs.gov/thredds/dodsC/prism_v2'
+
+ds = xray.open_dataset(URL)
+
+ds
+
+# select lat,lon region of interest
+# note: slice(20.5,55.0) fails
+dsloc = ds.sel(lon=slice(-75.0,-69.0),lat=slice(45.0,40.0))
+
+# select closest data to time of interest
+date = datetime.datetime(2005,8,1,0,0)
+#date = datetime.datetime.now()
+ds_snapshot = dsloc.sel(time=date,method='nearest')
+
+ds.data_vars
+# ds.coords
+# ds.attrs
+
+t = ds_snapshot['ppt']
+
+t.shape
+
+tvals = t.data
+
+tvals = np.ma.masked_invalid(t.data)
+
+plt.pcolormesh(t.lon.data,t.lat.data,tvals)
+plt.title(t.name+pd.Timestamp(t.time.values).strftime(': %Y-%m-%d  %H:%M:%S %Z %z'));
+plt.colorbar();
+
+tvals.min()
+
+# time series closest to specified lon,lat location
+ds_series = ds.sel(lon=-72.,lat=42.,method='nearest')
+
+# Select temperature and convert to Pandas Series
+v_series = ds_series['ppt'].to_series()
+
+v_series.plot(title=v_series.name);
+
+ds_snapshot.to_netcdf('ds_snapshot.nc')
+
+ds_snapshot
+
+

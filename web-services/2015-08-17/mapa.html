@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<head>
+   <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.css" />
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
+
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+   <link rel="stylesheet" href="https://rawgit.com/lvoogdt/Leaflet.awesome-markers/2.0/develop/dist/leaflet.awesome-markers.css">
+   <script src="https://rawgithub.com/lvoogdt/Leaflet.awesome-markers/2.0/develop/dist/leaflet.awesome-markers.js"></script>
+
+
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.Default.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/MarkerCluster.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster-src.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/0.4.0/leaflet.markercluster.js"></script>
+
+   <link rel="stylesheet" href="https://birdage.github.io/Leaflet.awesome-markers/dist/leaflet.awesome.rotate.css">
+
+   
+   
+   
+   
+
+   <style>
+
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position:absolute;
+        top:0;
+        bottom:0;
+        right:0;
+        left:0;
+      }
+
+   </style>
+</head>
+
+<body>
+
+   <div class="folium-map" id="folium_b68742555c4d4defa4ca77b80d1ccc9e" style="width: 100%; height: 100%"></div>
+
+   <script>
+
+      
+
+      var base_tile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 18,
+          minZoom: 1,
+          attribution: 'Map data (c) <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+      });
+
+      var baseLayer = {
+        "Base Layer": base_tile
+      };
+
+      /*
+      addition of the wms layers
+      */
+
+      
+      var HF_Radar = L.tileLayer.wms('http://hfrnet.ucsd.edu/thredds/wms/HFRNet/USEGC/6km/hourly/RTV',{format:'image/png',transparent: true,layers:'surface_sea_water_velocity'});
+      
+
+      /*
+      addition of the tile layers
+      */
+      
+      var Imagery = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/World_Imagery/MapServer/MapServer/tile/{z}/{y}/{x}');
+      
+      var Physical_Map = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/World_Physical_Map/MapServer/MapServer/tile/{z}/{y}/{x}');
+      
+      var Street_Map = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer/MapServer/tile/{z}/{y}/{x}');
+      
+      var Ocean_Base = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}');
+      
+      var Terrain_Base = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/World_Terrain_Base/MapServer/MapServer/tile/{z}/{y}/{x}');
+      
+      var Navigation_Charts = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/Specialty/World_Navigation_Charts/MapServer/tile/{z}/{y}/{x}');
+      
+      var Shaded_Relief = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/World_Shaded_Relief/MapServer/MapServer/tile/{z}/{y}/{x}');
+      
+      var Ocean_Reference = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}');
+      
+      var NatGeo_World_Map = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/NatGeo_World_Map/MapServer/MapServer/tile/{z}/{y}/{x}');
+      
+      var Topo_Map = L.tileLayer('http://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/MapServer/tile/{z}/{y}/{x}');
+      
+
+      /*
+      list of layers to be added
+      */
+      var layer_list = {
+      
+      "HF_Radar": HF_Radar,
+"Imagery": Imagery,
+"Physical_Map": Physical_Map,
+"Street_Map": Street_Map,
+"Ocean_Base": Ocean_Base,
+"Terrain_Base": Terrain_Base,
+"Navigation_Charts": Navigation_Charts,
+"Shaded_Relief": Shaded_Relief,
+"Ocean_Reference": Ocean_Reference,
+"NatGeo_World_Map": NatGeo_World_Map,
+"Topo_Map": Topo_Map
+
+      
+      };
+
+      /*
+      Bounding box.
+      */
+      var southWest = L.latLng(-90, -180),
+          northEast = L.latLng(90, 180),
+          bounds = L.latLngBounds(southWest, northEast);
+
+      /*
+      Creates the map and adds the selected layers
+      */
+      var map = L.map('folium_b68742555c4d4defa4ca77b80d1ccc9e', {
+                                       center:[42.33, -70.935],
+                                       zoom: 12,
+                                       maxBounds: bounds,
+                                       layers: [base_tile]
+                                     });
+
+      L.control.layers(baseLayer, layer_list).addTo(map);
+
+      //cluster group
+      var clusteredmarkers = L.markerClusterGroup();
+      //section for adding clustered markers
+      
+      var marker_13_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_13 = L.marker([42.3290880695, 
+							-70.7007241207],
+							{'icon':marker_13_icon}
+							);
+      marker_13.bindPopup("<b>Boston 16 Nm East Of Boston</b>\nCOAWST_4");
+      marker_13._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_13)
+      
+      var marker_14_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_14 = L.marker([42.3450012207, 
+							-70.6949996948],
+							{'icon':marker_14_icon}
+							);
+      marker_14.bindPopup("<b>Boston 16 Nm East Of Boston</b>\nG1SST__SST");
+      marker_14._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_14)
+      
+      var marker_15_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_15 = L.marker([42.3248, 
+							-70.71997],
+							{'icon':marker_15_icon}
+							);
+      marker_15.bindPopup("<b>Boston 16 Nm East Of Boston</b>\nHYCOM");
+      marker_15._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_15)
+      
+      var marker_16_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_16 = L.marker([42.3438606262, 
+							-70.6868438721],
+							{'icon':marker_16_icon}
+							);
+      marker_16.bindPopup("<b>Boston 16 Nm East Of Boston</b>\nNECOFS_FVCOM");
+      marker_16._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_16)
+      
+      var marker_17_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_17 = L.marker([42.3537483215, 
+							-70.6958465576],
+							{'icon':marker_17_icon}
+							);
+      marker_17.bindPopup("<b>Boston 16 Nm East Of Boston</b>\nNECOFS_GOM3_FVCOM");
+      marker_17._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_17)
+      
+      var marker_18_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_18 = L.marker([42.5175374732, 
+							-70.5646539478],
+							{'icon':marker_18_icon}
+							);
+      marker_18.bindPopup("<b>Buoy A01</b>\nCOAWST_4");
+      marker_18._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_18)
+      
+      var marker_19_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_19 = L.marker([42.5149993896, 
+							-70.5749969482],
+							{'icon':marker_19_icon}
+							);
+      marker_19.bindPopup("<b>Buoy A01</b>\nG1SST__SST");
+      marker_19._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_19)
+      
+      var marker_20_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_20 = L.marker([42.502, 
+							-70.63997],
+							{'icon':marker_20_icon}
+							);
+      marker_20.bindPopup("<b>Buoy A01</b>\nHYCOM");
+      marker_20._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_20)
+      
+      var marker_21_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_21 = L.marker([42.5258178711, 
+							-70.5724487305],
+							{'icon':marker_21_icon}
+							);
+      marker_21.bindPopup("<b>Buoy A01</b>\nNECOFS_FVCOM");
+      marker_21._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_21)
+      
+      var marker_22_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_22 = L.marker([42.5221290588, 
+							-70.5791854858],
+							{'icon':marker_22_icon}
+							);
+      marker_22.bindPopup("<b>Buoy A01</b>\nNECOFS_GOM3_FVCOM");
+      marker_22._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_22)
+      
+      var marker_23_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_23 = L.marker([42.338629677, 
+							-70.9752532511],
+							{'icon':marker_23_icon}
+							);
+      marker_23.bindPopup("<b>Boston, MA</b>\nCOAWST_4");
+      marker_23._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_23)
+      
+      var marker_24_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_24 = L.marker([42.3650016785, 
+							-71.0550003052],
+							{'icon':marker_24_icon}
+							);
+      marker_24.bindPopup("<b>Boston, MA</b>\nG1SST__SST");
+      marker_24._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_24)
+      
+      var marker_25_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_25 = L.marker([42.3534507751, 
+							-71.0513153076],
+							{'icon':marker_25_icon}
+							);
+      marker_25.bindPopup("<b>Boston, MA</b>\nNECOFS_FVCOM");
+      marker_25._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_25)
+      
+      var marker_26_icon = L.AwesomeMarkers.icon({ icon: 'info-sign',markerColor: 'blue',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_26 = L.marker([42.3565711975, 
+							-71.0468444824],
+							{'icon':marker_26_icon}
+							);
+      marker_26.bindPopup("<b>Boston, MA</b>\nNECOFS_GOM3_FVCOM");
+      marker_26._popup.options.maxWidth = 300;
+      clusteredmarkers.addLayer(marker_26)
+      
+      //add the clustered markers to the group anyway
+      map.addLayer(clusteredmarkers);
+
+      
+      var marker_27_icon = L.AwesomeMarkers.icon({ icon: 'ok',markerColor: 'green',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_27 = L.marker([42.35, 
+							-70.69],
+							{'icon':marker_27_icon}
+							);
+      marker_27.bindPopup("<div align='center'> Boston 16 Nm East Of Boston <br><iframe src='station_44013.html' alt='image'width='600px' height='275px' frameBorder='0'></div>");
+      marker_27._popup.options.maxWidth = 600;
+      map.addLayer(marker_27)
+      
+      var marker_28_icon = L.AwesomeMarkers.icon({ icon: 'ok',markerColor: 'green',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_28 = L.marker([42.52, 
+							-70.57],
+							{'icon':marker_28_icon}
+							);
+      marker_28.bindPopup("<div align='center'> Buoy A01 <br><iframe src='station_44029.html' alt='image'width='600px' height='275px' frameBorder='0'></div>");
+      marker_28._popup.options.maxWidth = 600;
+      map.addLayer(marker_28)
+      
+      var marker_29_icon = L.AwesomeMarkers.icon({ icon: 'ok',markerColor: 'green',prefix: 'glyphicon',extraClasses: 'fa-rotate-0'});
+      var marker_29 = L.marker([42.3548, 
+							-71.0534],
+							{'icon':marker_29_icon}
+							);
+      marker_29.bindPopup("<div align='center'> Boston, MA <br><iframe src='station_8443970.html' alt='image'width='600px' height='275px' frameBorder='0'></div>");
+      marker_29._popup.options.maxWidth = 600;
+      map.addLayer(marker_29)
+      
+
+      
+
+      
+      var latLngs = [ [42.03, -71.3],  [42.03, -70.57],  [42.63, -70.57],  [42.63, -71.3],  [42.03, -71.3], ];
+var line_1 = L.polyline(latLngs,{
+color: '#FF0000',
+weight: 2,
+
+});
+      
+      map.addLayer(line_1);
+      
+
+      
+
+      
+
+      
+
+
+
+   </script>
+
+</body>
